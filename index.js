@@ -2,7 +2,7 @@ const canvas = document.querySelector("canvas");
 const secondsCount = document.querySelector(".seconds");
 const level = document.querySelector(".grade");
 const context = canvas.getContext("2d");
-const pugDimensions = { width: 353 * 1.2, height: 325 * 1.2 };
+const laiosDimensions = { width: 353 * 1.2, height: 325 * 1.2 };
 
 
 const levels = {
@@ -33,9 +33,9 @@ canvas.height = window.innerHeight;
 context.translate(window.innerWidth / 2, window.innerHeight / 2);
 
 const image = new Image();
-image.src = "./assets/pug.png"; // Photo credit to Matthew Henry (https://unsplash.com/photos/U5rMrSI7Pn4)
+image.src = "./assets/laios.png"; // Photo credit to Ryōko Kui's Danjon Meshi Japanese manga series (https://en.wikipedia.org/wiki/Delicious_in_Dungeon)
 
-const loopingPugs = 40; // 125 pugs required to cover a full 4K television screen. Tested via Firefox DevTools
+const loopingLaios = 100;
 const offsetDistance = 120;
 let currentOffset = 0;
 
@@ -66,13 +66,13 @@ window.addEventListener('mousemove', onMouseMove)
 
 function draw(offset, loopCount) {
 
-  let currentPercentage = (loopingPugs - loopCount) / loopingPugs
+  let currentPercentage = (loopingLaios - loopCount) / loopingLaios
   context.drawImage(
     image,
-    -pugDimensions.width / 2 - offset/2 + (movementOffset.x * currentPercentage),
-    -pugDimensions.height / 2 - offset/2 + (movementOffset.y * currentPercentage),
-    pugDimensions.width + offset,
-    pugDimensions.height + offset
+    -laiosDimensions.width / 2 - offset/2 + (movementOffset.x * currentPercentage),
+    -laiosDimensions.height / 2 - offset/2 + (movementOffset.y * currentPercentage),
+    laiosDimensions.width + offset,
+    laiosDimensions.height + offset
   );
 }
 
@@ -90,7 +90,7 @@ function loopDraw() {
   movementOffset.x = lerp(movementOffset.x, mouseOffset.x, 0.05)
   movementOffset.y = lerp(movementOffset.y, mouseOffset.y, 0.05)
 
-  for (let i = loopingPugs; i >= 1; i--) {
+  for (let i = loopingLaios; i >= 1; i--) {
     draw(i * offsetDistance + currentOffset, i);
   }
 
